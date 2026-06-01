@@ -102,6 +102,8 @@ const imageInput =
 
 let uploadedImages = [];
 
+let imagesReady = false;
+
 if (imageInput) {
 
   imageInput.addEventListener(
@@ -113,12 +115,16 @@ if (imageInput) {
 
       uploadedImages = [];
 
+      imagesReady = false;
+
       const previewContainer =
         document.getElementById(
           "previewContainer"
         );
 
       previewContainer.innerHTML = "";
+
+      let completed = 0;
 
       files.forEach(file => {
 
@@ -137,7 +143,19 @@ if (imageInput) {
           img.src =
             e.target.result;
 
-          previewContainer.appendChild(img);
+          previewContainer.appendChild(
+            img
+          );
+
+          completed++;
+
+          if (
+            completed === files.length
+          ) {
+
+            imagesReady = true;
+
+          }
 
         };
 
@@ -150,6 +168,7 @@ if (imageInput) {
   );
 
 }
+
 
 /* CREATE ORDER */
 
@@ -164,17 +183,28 @@ if (form) {
 
       e.preventDefault();
 
-      if (uploadedImages.length === 0) {
 
-        alert(
-          "Please upload at least one image"
-        );
+if (uploadedImages.length === 0) {
 
-        return;
+  alert(
+    "Please upload at least one image"
+  );
 
-      }
+  return;
 
-      const trackingId =
+}
+
+if (!imagesReady) {
+
+  alert(
+    "Images are still loading, please wait..."
+  );
+
+  return;
+
+}
+
+const trackingId =
         "PKG" +
         Math.floor(
           Math.random() * 9000 + 1000
