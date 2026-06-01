@@ -1,9 +1,576 @@
-document.addEventListener("DOMContentLoaded", function () {
+
+// /* MENU */
+// function toggleMenu() {
+
+//   const nav =
+//     document.getElementById("navLinks");
+
+//   if (nav.style.display === "flex") {
+
+//     nav.style.display = "none";
+
+//   } else {
+
+//     nav.style.display = "flex";
+
+//   }
+
+// }
+
+// /* PASSWORD */
+
+// function togglePassword() {
+
+//   const password =
+//     document.getElementById("password");
+
+//   if (password.type === "password") {
+
+//     password.type = "text";
+
+//   } else {
+
+//     password.type = "password";
+
+//   }
+
+// }
+
+// /* LOGIN */
+
+// function login() {
+
+//   const password =
+//     document.getElementById("password").value;
+
+//   const message =
+//     document.getElementById("loginMessage");
+
+//   if (password === "Desmond12") {
+
+//     localStorage.setItem(
+//       "loggedIn",
+//       "true"
+//     );
+
+//     window.location.href =
+//       "home.html";
+
+//   } else {
+
+//     message.innerText =
+//       "Wrong Password";
+
+//   }
+
+// }
+
+// /* LOGOUT */
+
+// function logout() {
+
+//   localStorage.removeItem(
+//     "loggedIn"
+//   );
+
+//   window.location.href =
+//     "login.html";
+
+// }
+
+// /* TRACK PACKAGE */
+
+// function trackPackage() {
+
+//   const id =
+//     document.getElementById("trackInput").value;
+
+//   if (id) {
+
+//     window.location.href =
+//       `track.html?id=${id}`;
+
+//   }
+
+// }
+
+// /* IMAGE UPLOAD */
+
+// const imageInput =
+//   document.getElementById("image");
+
+// let uploadedImages = [];
+
+// let imagesReady = false;
+
+// if (imageInput) {
+
+//   imageInput.addEventListener(
+//     "change",
+//     function () {
+
+//       const files =
+//         Array.from(this.files);
+
+//       uploadedImages = [];
+
+//       imagesReady = false;
+
+//       const previewContainer =
+//         document.getElementById(
+//           "previewContainer"
+//         );
+
+//       previewContainer.innerHTML = "";
+
+//       let completed = 0;
+
+//       files.forEach(file => {
+
+//         const reader =
+//           new FileReader();
+
+//         reader.onload = function (e) {
+
+//           uploadedImages.push(
+//             e.target.result
+//           );
+
+//           const img =
+//             document.createElement("img");
+
+//           img.src =
+//             e.target.result;
+
+//           previewContainer.appendChild(
+//             img
+//           );
+
+//           completed++;
+
+//           if (
+//             completed === files.length
+//           ) {
+
+//             imagesReady = true;
+
+//           }
+
+//         };
+
+//         reader.readAsDataURL(file);
+
+//       });
+
+//     }
+
+//   );
+
+// }
+
+
+// /* CREATE ORDER */
+
+// const form =
+//   document.getElementById("orderForm");
+
+// if (form) {
+
+//   form.addEventListener(
+//     "submit",
+//     function (e) {
+
+//       e.preventDefault();
+
+    
+// if (uploadedImages.length === 0) {
+
+//   alert(
+//     "Please upload at least one image"
+//   );
+
+//   return;
+
+// }
+
+// if (!imagesReady) {
+
+//   alert(
+//     "Images are still loading, please wait..."
+//   );
+
+//   return;
+
+// }
+
+// const trackingId =
+//         "PKG" +
+//         Math.floor(
+//           Math.random() * 9000 + 1000
+//         );
+
+//       const receiver =
+//         document.getElementById("receiver").value;
+
+//       const address =
+//         document.getElementById("address").value;
+
+//       const product =
+//         document.getElementById("product").value;
+
+//       const description =
+//         document.getElementById("description").value;
+
+//       const phone =
+//         document.getElementById("phone").value;
+
+//       const hours =
+//         parseInt(
+//           document.getElementById("hours").value
+//         ) || 0;
+
+//       const minutes =
+//         parseInt(
+//           document.getElementById("minutes").value
+//         ) || 0;
+
+//       let totalSeconds =
+//         (hours * 3600) +
+//         (minutes * 60);
+
+//       if (totalSeconds <= 0) {
+
+//         totalSeconds = 60;
+
+//       }
+
+//       const riders = [
+
+//         "Kelvin Smith",
+
+//         "David Mark",
+
+//         "John Rider",
+
+//         "Michael Jay"
+
+//       ];
+
+//       const randomRider =
+//         riders[
+//           Math.floor(
+//             Math.random() *
+//             riders.length
+//           )
+//         ];
+
+//       const order = {
+
+//         id: trackingId,
+
+//         receiver: receiver,
+
+//         address: address,
+
+//         product: product,
+
+//         description: description,
+
+//         phone: phone,
+
+//         images: uploadedImages,
+
+//         progress: 0,
+
+//         status: "Out For Delivery",
+
+//         rider: randomRider,
+
+//         totalSeconds: totalSeconds
+
+//       };
+
+//       localStorage.setItem(
+//         trackingId,
+//         JSON.stringify(order)
+//       );
+
+//       const trackingLink =
+//         `${window.location.origin}${window.location.pathname.replace("create-order.html","")}track.html?id=${trackingId}`;
+
+//       document.getElementById("result").innerHTML = `
+
+//       <div class="order-card success-card">
+
+//         <h2>
+//           Order Generated Successfully 🎉
+//         </h2>
+
+//         <br>
+
+//         <h3>
+//           Tracking ID
+//         </h3>
+
+//         <a
+//           href="${trackingLink}"
+//           class="tracking-link"
+//         >
+//           ${trackingId}
+//         </a>
+
+//         <br><br>
+
+//         <button
+//           onclick="copyTrackingLink('${trackingLink}')"
+//         >
+//           Copy Tracking Link
+//         </button>
+
+//         <br><br>
+
+//         <a
+//           href="${trackingLink}"
+//           class="btn"
+//         >
+//           Open Tracking Page
+//         </a>
+
+//       </div>
+
+//       `;
+
+//       form.reset();
+
+//       uploadedImages = [];
+
+//       document.getElementById(
+//         "previewContainer"
+//       ).innerHTML = "";
+
+//     }
+
+//   );
+
+// }
+
+// /* COPY LINK */
+
+// function copyTrackingLink(link) {
+
+//   navigator.clipboard.writeText(link);
+
+//   alert(
+//     "Tracking link copied!"
+//   );
+
+// }
+
+// /* TRACKING PAGE */
+
+// const params =
+//   new URLSearchParams(
+//     window.location.search
+//   );
+
+// const trackingId =
+//   params.get("id");
+
+// if (
+//   trackingId &&
+//   document.getElementById(
+//     "trackingDetails"
+//   )
+// ) {
+
+//   const order =
+//     JSON.parse(
+//       localStorage.getItem(trackingId)
+//     );
+
+//   if (order) {
+
+//     let galleryHTML = "";
+
+//     order.images.forEach(image => {
+
+//       galleryHTML += `
+//         <img src="${image}">
+//       `;
+
+//     });
+
+//     document.getElementById(
+//       "trackingDetails"
+//     ).innerHTML = `
+
+//     <div class="order-card">
+
+//       <h2>${order.id}</h2>
+
+//       <p>
+//         <strong>Receiver:</strong>
+//         ${order.receiver}
+//       </p>
+
+//       <p>
+//         <strong>Product:</strong>
+//         ${order.product}
+//       </p>
+
+//       <p>
+//         <strong>Address:</strong>
+//         ${order.address}
+//       </p>
+
+//       <p>
+//         <strong>Rider:</strong>
+//         ${order.rider}
+//       </p>
+
+//       <p>
+//         <strong>Status:</strong>
+//         <span id="statusText">
+//           ${order.status}
+//         </span>
+//       </p>
+
+//       <div class="tracking-gallery">
+//         ${galleryHTML}
+//       </div>
+
+//     </div>
+
+//     `;
+
+//     let progress = 0;
+
+//     let remainingTime =
+//       order.totalSeconds;
+
+//     const maxProgress = 70;
+
+//     const progressPerSecond =
+//       maxProgress / remainingTime;
+
+//     const timer =
+//       setInterval(() => {
+
+//         if (progress >= 70) {
+
+//           clearInterval(timer);
+
+//           document.getElementById(
+//             "statusText"
+//           ).innerText =
+//             "Delivery Delayed";
+
+//           return;
+
+//         }
+
+//         progress +=
+//           progressPerSecond;
+
+//         if (progress > 70) {
+
+//           progress = 70;
+
+//         }
+
+//         document.getElementById(
+//           "progressBar"
+//         ).style.width =
+//           progress + "%";
+
+//         document.getElementById(
+//           "progressText"
+//         ).innerText =
+//           Math.floor(progress) + "%";
+
+//         document.getElementById(
+//           "rider"
+//         ).style.left =
+//           progress + "%";
+
+//         remainingTime--;
+
+//         const hours =
+//           Math.floor(
+//             remainingTime / 3600
+//           );
+
+//         const minutes =
+//           Math.floor(
+//             (remainingTime % 3600) / 60
+//           );
+
+//         const seconds =
+//           remainingTime % 60;
+
+//         document.getElementById(
+//           "timer"
+//         ).innerText =
+//           `${hours}h ${minutes}m ${seconds}s`;
+
+//       }, 1000);
+
+//   }
+
+// }
+
+// /* DASHBOARD */
+
+// const ordersContainer =
+//   document.getElementById(
+//     "ordersContainer"
+//   );
+
+// if (ordersContainer) {
+
+//   for (
+//     let i = 0;
+//     i < localStorage.length;
+//     i++
+//   ) {
+
+//     const key =
+//       localStorage.key(i);
+
+//     if (
+//       key.startsWith("PKG")
+//     ) {
+
+//       const order =
+//         JSON.parse(
+//           localStorage.getItem(key)
+//         );
+
+//       ordersContainer.innerHTML += `
+
+//       <div class="order-card">
+
+//         <h3>${order.id}</h3>
+
+//         <p>${order.receiver}</p>
+
+//         <p>${order.product}</p>
+
+//         <p>${order.status}</p>
+
+//       </div>
+
+//       `;
+
+//     }
+
+//   }
+
+// }
 
 /* MENU */
 function toggleMenu() {
   const nav = document.getElementById("navLinks");
-
   if (nav.style.display === "flex") {
     nav.style.display = "none";
   } else {
@@ -14,7 +581,6 @@ function toggleMenu() {
 /* PASSWORD */
 function togglePassword() {
   const password = document.getElementById("password");
-
   if (password.type === "password") {
     password.type = "text";
   } else {
@@ -26,7 +592,6 @@ function togglePassword() {
 function login() {
   const password = document.getElementById("password").value;
   const message = document.getElementById("loginMessage");
-
   if (password === "Desmond12") {
     localStorage.setItem("loggedIn", "true");
     window.location.href = "home.html";
@@ -44,122 +609,9 @@ function logout() {
 /* TRACK PACKAGE */
 function trackPackage() {
   const id = document.getElementById("trackInput").value;
-
   if (id) {
     window.location.href = `track.html?id=${id}`;
   }
-}
-
-/* IMAGE UPLOAD */
-const imageInput = document.getElementById("image");
-
-let uploadedImages = [];
-
-if (imageInput) {
-  imageInput.addEventListener("change", function () {
-    const files = Array.from(this.files);
-
-    const previewContainer = document.getElementById("previewContainer");
-    previewContainer.innerHTML = "";
-
-    uploadedImages = [];
-
-    Promise.all(
-      files.map(file => {
-        return new Promise(resolve => {
-          const reader = new FileReader();
-          reader.onload = e => resolve(e.target.result);
-          reader.readAsDataURL(file);
-        });
-      })
-    ).then(results => {
-      uploadedImages = results;
-
-      results.forEach(imgSrc => {
-        const img = document.createElement("img");
-        img.src = imgSrc;
-        previewContainer.appendChild(img);
-      });
-    });
-  });
-}
-
-/* CREATE ORDER */
-const form = document.getElementById("orderForm");
-
-if (form) {
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    if (uploadedImages.length === 0) {
-      alert("Please upload at least one image");
-      return;
-    }
-
-    const trackingId =
-      "PKG" + Math.floor(Math.random() * 9000 + 1000);
-
-    const receiver = document.getElementById("receiver").value;
-    const address = document.getElementById("address").value;
-    const product = document.getElementById("product").value;
-    const description = document.getElementById("description").value;
-    const phone = document.getElementById("phone").value;
-
-    const hours = parseInt(document.getElementById("hours").value) || 0;
-    const minutes = parseInt(document.getElementById("minutes").value) || 0;
-
-    let totalSeconds = (hours * 3600) + (minutes * 60);
-    if (totalSeconds <= 0) totalSeconds = 60;
-
-    const riders = ["Kelvin Smith", "David Mark", "John Rider", "Michael Jay"];
-
-    const randomRider = riders[Math.floor(Math.random() * riders.length)];
-
-    const order = {
-      id: trackingId,
-      receiver,
-      address,
-      product,
-      description,
-      phone,
-      images: uploadedImages,
-      progress: 0,
-      status: "Out For Delivery",
-      rider: randomRider,
-      totalSeconds
-    };
-
-    localStorage.setItem(trackingId, JSON.stringify(order));
-
-    const trackingLink =
-      `${window.location.origin}${window.location.pathname
-        .replace("create-order.html", "")}track.html?id=${trackingId}`;
-
-    document.getElementById("result").innerHTML = `
-      <div class="order-card success-card">
-        <h2>Order Generated Successfully 🎉</h2>
-
-        <h3>Tracking ID</h3>
-        <a href="${trackingLink}" class="tracking-link">${trackingId}</a>
-
-        <br><br>
-
-        <button onclick="copyTrackingLink('${trackingLink}')">
-          Copy Tracking Link
-        </button>
-
-        <br><br>
-
-        <a href="${trackingLink}" class="btn">
-          Open Tracking Page
-        </a>
-      </div>
-    `;
-
-    form.reset();
-    uploadedImages = [];
-    document.getElementById("previewContainer").innerHTML = "";
-  });
 }
 
 /* COPY LINK */
@@ -168,92 +620,205 @@ function copyTrackingLink(link) {
   alert("Tracking link copied!");
 }
 
-/* TRACKING PAGE */
-const params = new URLSearchParams(window.location.search);
-const trackIdParam = params.get("id");
+/* DOM READY — image upload + form + dashboard + tracking */
+document.addEventListener("DOMContentLoaded", function () {
 
-if (trackIdParam && document.getElementById("trackingDetails")) {
-  const order = JSON.parse(localStorage.getItem(trackIdParam));
+  /* IMAGE UPLOAD */
+  let uploadedImages = [];
 
-  if (order) {
-    let galleryHTML = "";
+  const imageInput = document.getElementById("image");
 
-    order.images.forEach(image => {
-      galleryHTML += `<img src="${image}">`;
+  if (imageInput) {
+    imageInput.addEventListener("change", function () {
+      const files = Array.from(this.files);
+      uploadedImages = [];
+
+      const previewContainer = document.getElementById("previewContainer");
+      previewContainer.innerHTML = "";
+
+      // Show a loading indicator while images encode
+      const loadingMsg = document.createElement("p");
+      loadingMsg.id = "imgLoadingMsg";
+      loadingMsg.innerText = "Loading images...";
+      previewContainer.appendChild(loadingMsg);
+
+      let completed = 0;
+
+      files.forEach(function (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          uploadedImages.push(e.target.result);
+
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          previewContainer.appendChild(img);
+
+          completed++;
+
+          if (completed === files.length) {
+            // Remove loading message once all images are ready
+            const msg = document.getElementById("imgLoadingMsg");
+            if (msg) msg.remove();
+          }
+        };
+
+        reader.onerror = function () {
+          completed++;
+          alert("Failed to read one of the images. Please try again.");
+        };
+
+        reader.readAsDataURL(file);
+      });
     });
+  }
 
-    document.getElementById("trackingDetails").innerHTML = `
-      <div class="order-card">
-        <h2>${order.id}</h2>
+  /* CREATE ORDER */
+  const form = document.getElementById("orderForm");
 
-        <p><strong>Receiver:</strong> ${order.receiver}</p>
-        <p><strong>Product:</strong> ${order.product}</p>
-        <p><strong>Address:</strong> ${order.address}</p>
-        <p><strong>Rider:</strong> ${order.rider}</p>
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-        <p>
-          <strong>Status:</strong>
-          <span id="statusText">${order.status}</span>
-        </p>
-
-        <div class="tracking-gallery">
-          ${galleryHTML}
-        </div>
-      </div>
-    `;
-
-    let progress = 0;
-    let remainingTime = order.totalSeconds;
-    const maxProgress = 70;
-    const progressPerSecond = maxProgress / remainingTime;
-
-    const timer = setInterval(() => {
-      if (progress >= 70) {
-        clearInterval(timer);
-        document.getElementById("statusText").innerText = "Delivery Delayed";
+      if (uploadedImages.length === 0) {
+        alert("Please upload at least one image");
         return;
       }
 
-      progress += progressPerSecond;
+      // Wait for images to finish loading if still pending
+      const totalFiles = imageInput.files ? imageInput.files.length : 0;
+      if (uploadedImages.length < totalFiles) {
+        alert("Images are still loading, please wait a moment and try again.");
+        return;
+      }
 
-      document.getElementById("progressBar").style.width = progress + "%";
-      document.getElementById("progressText").innerText = Math.floor(progress) + "%";
-      document.getElementById("rider").style.left = progress + "%";
+      const trackingId = "PKG" + Math.floor(Math.random() * 9000 + 1000);
 
-      remainingTime--;
+      const receiver    = document.getElementById("receiver").value;
+      const address     = document.getElementById("address").value;
+      const product     = document.getElementById("product").value;
+      const description = document.getElementById("description").value;
+      const phone       = document.getElementById("phone").value;
 
-      const hours = Math.floor(remainingTime / 3600);
-      const minutes = Math.floor((remainingTime % 3600) / 60);
-      const seconds = remainingTime % 60;
+      const hours   = parseInt(document.getElementById("hours").value) || 0;
+      const minutes = parseInt(document.getElementById("minutes").value) || 0;
 
-      document.getElementById("timer").innerText =
-        `${hours}h ${minutes}m ${seconds}s`;
+      let totalSeconds = (hours * 3600) + (minutes * 60);
+      if (totalSeconds <= 0) totalSeconds = 60;
 
-    }, 1000);
-  }
-}
+      const riders = ["Kelvin Smith", "David Mark", "John Rider", "Michael Jay"];
+      const randomRider = riders[Math.floor(Math.random() * riders.length)];
 
-/* DASHBOARD */
-const ordersContainer = document.getElementById("ordersContainer");
+      const order = {
+        id: trackingId,
+        receiver: receiver,
+        address: address,
+        product: product,
+        description: description,
+        phone: phone,
+        images: uploadedImages,
+        progress: 0,
+        status: "Out For Delivery",
+        rider: randomRider,
+        totalSeconds: totalSeconds
+      };
 
-if (ordersContainer) {
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
+      localStorage.setItem(trackingId, JSON.stringify(order));
 
-    if (key.startsWith("PKG")) {
-      const order = JSON.parse(localStorage.getItem(key));
+      const trackingLink = `${window.location.origin}${window.location.pathname.replace("create-order.html", "")}track.html?id=${trackingId}`;
 
-      ordersContainer.innerHTML += `
-        <div class="order-card">
-          <h3>${order.id}</h3>
-          <p>${order.receiver}</p>
-          <p>${order.product}</p>
-          <p>${order.status}</p>
+      document.getElementById("result").innerHTML = `
+        <div class="order-card success-card">
+          <h2>Order Generated Successfully 🎉</h2>
+          <br>
+          <h3>Tracking ID</h3>
+          <a href="${trackingLink}" class="tracking-link">${trackingId}</a>
+          <br><br>
+          <button onclick="copyTrackingLink('${trackingLink}')">Copy Tracking Link</button>
+          <br><br>
+          <a href="${trackingLink}" class="btn">Open Tracking Page</a>
         </div>
       `;
+
+      form.reset();
+      uploadedImages = [];
+      document.getElementById("previewContainer").innerHTML = "";
+    });
+  }
+
+  /* TRACKING PAGE */
+  const params = new URLSearchParams(window.location.search);
+  const trackingId = params.get("id");
+
+  if (trackingId && document.getElementById("trackingDetails")) {
+    const order = JSON.parse(localStorage.getItem(trackingId));
+
+    if (order) {
+      let galleryHTML = "";
+      order.images.forEach(function (image) {
+        galleryHTML += `<img src="${image}">`;
+      });
+
+      document.getElementById("trackingDetails").innerHTML = `
+        <div class="order-card">
+          <h2>${order.id}</h2>
+          <p><strong>Receiver:</strong> ${order.receiver}</p>
+          <p><strong>Product:</strong> ${order.product}</p>
+          <p><strong>Address:</strong> ${order.address}</p>
+          <p><strong>Rider:</strong> ${order.rider}</p>
+          <p><strong>Status:</strong> <span id="statusText">${order.status}</span></p>
+          <div class="tracking-gallery">${galleryHTML}</div>
+        </div>
+      `;
+
+      let progress = 0;
+      let remainingTime = order.totalSeconds;
+      const maxProgress = 70;
+      const progressPerSecond = maxProgress / remainingTime;
+
+      const timer = setInterval(function () {
+        if (progress >= 70) {
+          clearInterval(timer);
+          document.getElementById("statusText").innerText = "Delivery Delayed";
+          return;
+        }
+
+        progress += progressPerSecond;
+        if (progress > 70) progress = 70;
+
+        document.getElementById("progressBar").style.width = progress + "%";
+        document.getElementById("progressText").innerText = Math.floor(progress) + "%";
+        document.getElementById("rider").style.left = progress + "%";
+
+        remainingTime--;
+
+        const h = Math.floor(remainingTime / 3600);
+        const m = Math.floor((remainingTime % 3600) / 60);
+        const s = remainingTime % 60;
+
+        document.getElementById("timer").innerText = `${h}h ${m}m ${s}s`;
+      }, 1000);
     }
   }
-}
 
-}); 
-// END DOMContentLoaded
+  /* DASHBOARD */
+  const ordersContainer = document.getElementById("ordersContainer");
+
+  if (ordersContainer) {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.startsWith("PKG")) {
+        const order = JSON.parse(localStorage.getItem(key));
+        ordersContainer.innerHTML += `
+          <div class="order-card">
+            <h3>${order.id}</h3>
+            <p>${order.receiver}</p>
+            <p>${order.product}</p>
+            <p>${order.status}</p>
+          </div>
+        `;
+      }
+    }
+  }
+
+});
