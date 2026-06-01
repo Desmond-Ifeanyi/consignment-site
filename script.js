@@ -267,7 +267,7 @@ if (form) {
         progress: 0,
 
         status:
-          "Order Received",
+          "Out for delivery",
 
         rider: randomRider,
 
