@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Track Package</title>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">SwiftDrop</div>
+
+  <nav id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="create-order.html">Create Order</a>
+    <a href="track.html">Track Package</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="#" onclick="logout()">Logout</a>
+  </nav>
+</header>
+
+<section class="tracking-page">
+  <h1>Live Package Tracking</h1>
+
+  <div id="trackingDetails"></div>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <h2 id="progressText">0%</h2>
+
+  <div class="map">
+    <div class="road"></div>
+    <div class="rider" id="rider">🏍</div>
+  </div>
+
+  <div class="status-box">
+    <h3 id="statusText">Out for delivery</h3>
+    <p id="timer"></p>
+  </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

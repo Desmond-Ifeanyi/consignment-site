@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Create Order</title>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">SwiftDrop</div>
+
+  <nav id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="create-order.html">Create Order</a>
+    <a href="track.html">Track Package</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="#" onclick="logout()">Logout</a>
+  </nav>
+  <div class="menu" onclick="toggleMenu()">☰</div>
+</header>
+
+<section class="form-section">
+  <h1>Create Delivery Order</h1>
+
+  <form id="orderForm">
+    <input type="text" id="receiver" placeholder="Receiver Name" required>
+
+    <input type="text" id="address" placeholder="Delivery Address" required>
+
+    <input type="text" id="product" placeholder="Product Name" required>
+
+    <textarea id="description" placeholder="Product Description"></textarea>
+
+    <input type="text" id="phone" placeholder="Phone Number">
+
+    <label>Delivery Time</label>
+    <div class="time-grid">
+      <input type="number" id="hours" placeholder="Hours">
+      <input type="number" id="minutes" placeholder="Minutes">
+    </div>
+
+    <!-- <input type="file" id="image" accept="image/*"> -->
+    <input type="file" id="image" accept="image/*" multiple >
+
+    <!-- <img id="preview" class="preview" /> -->
+    <div id="previewContainer" class="preview-container"></div>
+
+    <button type="submit">Generate Tracking Link</button>
+  </form>
+
+  <div id="result"></div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
