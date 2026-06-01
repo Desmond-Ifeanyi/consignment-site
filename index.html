@@ -2,93 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Login</title>
   <link rel="stylesheet" href="style.css">
-  <title>SwiftDrop</title>
 </head>
-<body>
+<body class="login-body">
 
-<header class="navbar">
-  <div class="logo">SwiftDrop</div>
+<div class="login-container">
+  <h1>SwiftDrop Login</h1>
 
-  <nav id="navLinks">
-    <a href="index.html">Home</a>
-    <a href="create-order.html">Create Order</a>
-    <a href="track.html">Track Package</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="#" onclick="logout()">Logout</a>
-  </nav>
+  <input type="text" id="username" placeholder="Username">
 
-  <div class="menu" onclick="toggleMenu()">☰</div>
-</header>
-
-<section class="hero">
-  <div class="hero-content">
-    <h1>Fast. Reliable. Delivered.</h1>
-    <p>Track and manage your deliveries with SwiftDrop.</p>
-
-    <div class="tracking-box">
-      <input type="text" id="trackInput" placeholder="Enter Tracking ID" />
-      <button onclick="trackPackage()">Track Package</button>
-    </div>
-
-    <div class="hero-buttons">
-      <a href="create-order.html" class="btn">Ship Now</a>
-      <a href="track.html" class="btn secondary">Live Tracking</a>
-    </div>
+  <div class="password-box">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="togglePassword()">👁</button>
   </div>
 
-  <div class="floating-package">📦</div>
-</section>
+  <button onclick="login()">Login</button>
 
-<section class="services">
-  <h2>Our Services</h2>
-
-  <div class="service-grid">
-    <div class="card">
-      <h3>Same Day</h3>
-      <p>₦3,500</p>
-    </div>
-
-    <div class="card">
-      <h3>Next Day</h3>
-      <p>₦2,000</p>
-    </div>
-
-    <div class="card">
-      <h3>Scheduled</h3>
-      <p>₦4,000</p>
-    </div>
-
-    <div class="card">
-      <h3>International</h3>
-      <p>₦15,000</p>
-    </div>
-  </div>
-</section>
-
-<section class="stats">
-  <div>
-    <h2>2M+</h2>
-    <p>Packages Delivered</p>
-  </div>
-
-  <div>
-    <h2>98.4%</h2>
-    <p>On-Time Rate</p>
-  </div>
-
-  <div>
-    <h2>4.8★</h2>
-    <p>Customer Rating</p>
-  </div>
-</section>
-
-<footer>
-  <h3>SwiftDrop</h3>
-  <p>Fast delivery everywhere.</p>
-</footer>
+  <p id="loginMessage"></p>
+</div>
 
 <script src="script.js"></script>
 </body>
 </html>
+

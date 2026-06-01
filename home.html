@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <link rel="stylesheet" href="style.css">
+  <title>SwiftDrop</title>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">SwiftDrop</div>
+
+  <nav id="navLinks">
+    <a href="home.html">Home</a>
+    <a href="create-order.html">Create Order</a>
+    <a href="track.html">Track Package</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="#" onclick="logout()">Logout</a>
+  </nav>
+
+  <div class="menu" onclick="toggleMenu()">☰</div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Fast. Reliable. Delivered.</h1>
+    <p>Track and manage your deliveries with SwiftDrop.</p>
+
+    <div class="tracking-box">
+      <input type="text" id="trackInput" placeholder="Enter Tracking ID" />
+      <button onclick="trackPackage()">Track Package</button>
+    </div>
+
+    <div class="hero-buttons">
+      <a href="create-order.html" class="btn">Ship Now</a>
+      <a href="track.html" class="btn secondary">Live Tracking</a>
+    </div>
+  </div>
+
+  <div class="floating-package">📦</div>
+</section>
+
+<section class="services">
+  <h2>Our Services</h2>
+
+  <div class="service-grid">
+    <div class="card">
+      <h3>Same Day</h3>
+      <p>₦3,500</p>
+    </div>
+
+    <div class="card">
+      <h3>Next Day</h3>
+      <p>₦2,000</p>
+    </div>
+
+    <div class="card">
+      <h3>Scheduled</h3>
+      <p>₦4,000</p>
+    </div>
+
+    <div class="card">
+      <h3>International</h3>
+      <p>₦15,000</p>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div>
+    <h2>2M+</h2>
+    <p>Packages Delivered</p>
+  </div>
+
+  <div>
+    <h2>98.4%</h2>
+    <p>On-Time Rate</p>
+  </div>
+
+  <div>
+    <h2>4.8★</h2>
+    <p>Customer Rating</p>
+  </div>
+</section>
+
+<footer>
+  <h3>SwiftDrop</h3>
+  <p>Fast delivery everywhere.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

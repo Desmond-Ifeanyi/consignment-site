@@ -60,7 +60,7 @@ function login() {
     );
 
     window.location.href =
-      "index.html";
+      "home.html";
 
   } else {
 
