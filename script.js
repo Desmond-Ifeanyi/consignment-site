@@ -1,9 +1,10 @@
+
+/* MENU */
+
 function toggleMenu() {
 
   const nav =
-    document.getElementById(
-      "navLinks"
-    );
+    document.getElementById("navLinks");
 
   if (nav.style.display === "flex") {
 
@@ -17,14 +18,12 @@ function toggleMenu() {
 
 }
 
-/* PASSWORD TOGGLE */
+/* PASSWORD */
 
 function togglePassword() {
 
   const password =
-    document.getElementById(
-      "password"
-    );
+    document.getElementById("password");
 
   if (password.type === "password") {
 
@@ -43,14 +42,10 @@ function togglePassword() {
 function login() {
 
   const password =
-    document.getElementById(
-      "password"
-    ).value;
+    document.getElementById("password").value;
 
   const message =
-    document.getElementById(
-      "loginMessage"
-    );
+    document.getElementById("loginMessage");
 
   if (password === "Desmond12") {
 
@@ -89,9 +84,7 @@ function logout() {
 function trackPackage() {
 
   const id =
-    document.getElementById(
-      "trackInput"
-    ).value;
+    document.getElementById("trackInput").value;
 
   if (id) {
 
@@ -102,77 +95,12 @@ function trackPackage() {
 
 }
 
-/* MULTIPLE IMAGE PREVIEW */
-
-// const imageInput =
-//   document.getElementById(
-//     "image"
-//   );
-
-// let uploadedImages = [];
-
-// if (imageInput) {
-
-//   imageInput.addEventListener(
-//     "change",
-//     function () {
-
-//       const files =
-//         Array.from(this.files);
-
-//       uploadedImages = [];
-
-//       const previewContainer =
-//         document.getElementById(
-//           "previewContainer"
-//         );
-
-//       previewContainer.innerHTML = "";
-
-//       files.forEach(file => {
-
-//         const reader =
-//           new FileReader();
-
-//         reader.onload = function (e) {
-
-//           uploadedImages.push(
-//             e.target.result
-//           );
-
-//           const img =
-//             document.createElement(
-//               "img"
-//             );
-
-//           img.src =
-//             e.target.result;
-
-//           previewContainer.appendChild(
-//             img
-//           );
-
-//         };
-
-//         reader.readAsDataURL(file);
-
-//       });
-
-//     }
-
-//   );
-
-// }
-
-
-
+/* IMAGE UPLOAD */
 
 const imageInput =
   document.getElementById("image");
 
 let uploadedImages = [];
-
-let imagesLoaded = false;
 
 if (imageInput) {
 
@@ -185,16 +113,12 @@ if (imageInput) {
 
       uploadedImages = [];
 
-      imagesLoaded = false;
-
       const previewContainer =
         document.getElementById(
           "previewContainer"
         );
 
       previewContainer.innerHTML = "";
-
-      let loadedCount = 0;
 
       files.forEach(file => {
 
@@ -213,19 +137,7 @@ if (imageInput) {
           img.src =
             e.target.result;
 
-          previewContainer.appendChild(
-            img
-          );
-
-          loadedCount++;
-
-          if (
-            loadedCount === files.length
-          ) {
-
-            imagesLoaded = true;
-
-          }
+          previewContainer.appendChild(img);
 
         };
 
@@ -239,13 +151,10 @@ if (imageInput) {
 
 }
 
-
 /* CREATE ORDER */
 
 const form =
-  document.getElementById(
-    "orderForm"
-  );
+  document.getElementById("orderForm");
 
 if (form) {
 
@@ -255,15 +164,15 @@ if (form) {
 
       e.preventDefault();
 
-      if (!imagesLoaded) {
+      if (uploadedImages.length === 0) {
 
-  alert(
-    "Please wait for images to finish loading"
-  );
+        alert(
+          "Please upload at least one image"
+        );
 
-  return;
+        return;
 
-}
+      }
 
       const trackingId =
         "PKG" +
@@ -272,47 +181,39 @@ if (form) {
         );
 
       const receiver =
-        document.getElementById(
-          "receiver"
-        ).value;
+        document.getElementById("receiver").value;
 
       const address =
-        document.getElementById(
-          "address"
-        ).value;
+        document.getElementById("address").value;
 
       const product =
-        document.getElementById(
-          "product"
-        ).value;
+        document.getElementById("product").value;
 
       const description =
-        document.getElementById(
-          "description"
-        ).value;
+        document.getElementById("description").value;
 
       const phone =
-        document.getElementById(
-          "phone"
-        ).value;
+        document.getElementById("phone").value;
 
       const hours =
         parseInt(
-          document.getElementById(
-            "hours"
-          ).value
+          document.getElementById("hours").value
         ) || 0;
 
       const minutes =
         parseInt(
-          document.getElementById(
-            "minutes"
-          ).value
+          document.getElementById("minutes").value
         ) || 0;
 
-      const totalSeconds =
+      let totalSeconds =
         (hours * 3600) +
         (minutes * 60);
+
+      if (totalSeconds <= 0) {
+
+        totalSeconds = 60;
+
+      }
 
       const riders = [
 
@@ -352,13 +253,11 @@ if (form) {
 
         progress: 0,
 
-        status:
-          "Out for delivery",
+        status: "Out For Delivery",
 
         rider: randomRider,
 
-        totalSeconds:
-          totalSeconds
+        totalSeconds: totalSeconds
 
       };
 
@@ -368,11 +267,9 @@ if (form) {
       );
 
       const trackingLink =
-        `track.html?id=${trackingId}`;
+        `${window.location.origin}${window.location.pathname.replace("create-order.html","")}track.html?id=${trackingId}`;
 
-      document.getElementById(
-        "result"
-      ).innerHTML = `
+      document.getElementById("result").innerHTML = `
 
       <div class="order-card success-card">
 
@@ -416,16 +313,11 @@ if (form) {
 
       form.reset();
 
-      const previewContainer =
-        document.getElementById(
-          "previewContainer"
-        );
+      uploadedImages = [];
 
-      if (previewContainer) {
-
-        previewContainer.innerHTML = "";
-
-      }
+      document.getElementById(
+        "previewContainer"
+      ).innerHTML = "";
 
     }
 
@@ -437,13 +329,7 @@ if (form) {
 
 function copyTrackingLink(link) {
 
-  navigator.clipboard.writeText(
-
-    window.location.origin +
-    "/" +
-    link
-
-  );
+  navigator.clipboard.writeText(link);
 
   alert(
     "Tracking link copied!"
@@ -470,26 +356,20 @@ if (
 
   const order =
     JSON.parse(
-      localStorage.getItem(
-        trackingId
-      )
+      localStorage.getItem(trackingId)
     );
 
   if (order) {
 
     let galleryHTML = "";
 
-    order.images.forEach(
-      image => {
+    order.images.forEach(image => {
 
-        galleryHTML += `
-
+      galleryHTML += `
         <img src="${image}">
+      `;
 
-        `;
-
-      }
-    );
+    });
 
     document.getElementById(
       "trackingDetails"
@@ -497,47 +377,30 @@ if (
 
     <div class="order-card">
 
-      <h2>
-        ${order.id}
-      </h2>
+      <h2>${order.id}</h2>
 
       <p>
-        <strong>
-          Receiver:
-        </strong>
-
+        <strong>Receiver:</strong>
         ${order.receiver}
       </p>
 
       <p>
-        <strong>
-          Product:
-        </strong>
-
+        <strong>Product:</strong>
         ${order.product}
       </p>
 
       <p>
-        <strong>
-          Address:
-        </strong>
-
+        <strong>Address:</strong>
         ${order.address}
       </p>
 
       <p>
-        <strong>
-          Rider:
-        </strong>
-
+        <strong>Rider:</strong>
         ${order.rider}
       </p>
 
       <p>
-        <strong>
-          Status:
-        </strong>
-
+        <strong>Status:</strong>
         <span id="statusText">
           ${order.status}
         </span>
@@ -551,28 +414,7 @@ if (
 
     `;
 
-    const statuses = [
-
-      // "Order Received",
-
-      // "Preparing Package",
-
-      // "Rider Assigned",
-
-      // "Package Picked Up",
-
-      // "In Transit",
-
-      "Out For Delivery"
-
-    ];
-
-
-
-    
     let progress = 0;
-
-    let statusIndex = 0;
 
     let remainingTime =
       order.totalSeconds;
@@ -615,8 +457,7 @@ if (
         document.getElementById(
           "progressText"
         ).innerText =
-          Math.floor(progress) +
-          "%";
+          Math.floor(progress) + "%";
 
         document.getElementById(
           "rider"
@@ -641,54 +482,13 @@ if (
         document.getElementById(
           "timer"
         ).innerText =
-
           `${hours}h ${minutes}m ${seconds}s`;
-
-        // const stageProgress =
-        //   Math.floor(
-        //     progress / 12
-        //   );
-
-        // if (
-        //   stageProgress !==
-        //   statusIndex
-        // ) {
-
-        //   statusIndex =
-        //     stageProgress;
-
-        //   if (
-        //     statusIndex >=
-        //     statuses.length
-        //   ) {
-
-        //     statusIndex =
-        //       statuses.length - 1;
-
-        //   }
-
-        //   document.getElementById(
-        //     "statusText"
-        //   ).innerText =
-
-        //     statuses[
-        //       statusIndex
-        //     ];
-
-        // }
-        document.getElementById(
-  "statusText"
-).innerText =
-  "Out For Delivery";
 
       }, 1000);
 
   }
 
 }
-
-
-
 
 /* DASHBOARD */
 
@@ -714,30 +514,20 @@ if (ordersContainer) {
 
       const order =
         JSON.parse(
-          localStorage.getItem(
-            key
-          )
+          localStorage.getItem(key)
         );
 
       ordersContainer.innerHTML += `
 
       <div class="order-card">
 
-        <h3>
-          ${order.id}
-        </h3>
+        <h3>${order.id}</h3>
 
-        <p>
-          ${order.receiver}
-        </p>
+        <p>${order.receiver}</p>
 
-        <p>
-          ${order.product}
-        </p>
+        <p>${order.product}</p>
 
-        <p>
-          ${order.status}
-        </p>
+        <p>${order.status}</p>
 
       </div>
 
