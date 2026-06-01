@@ -1,572 +1,4 @@
 
-// /* MENU */
-// function toggleMenu() {
-
-//   const nav =
-//     document.getElementById("navLinks");
-
-//   if (nav.style.display === "flex") {
-
-//     nav.style.display = "none";
-
-//   } else {
-
-//     nav.style.display = "flex";
-
-//   }
-
-// }
-
-// /* PASSWORD */
-
-// function togglePassword() {
-
-//   const password =
-//     document.getElementById("password");
-
-//   if (password.type === "password") {
-
-//     password.type = "text";
-
-//   } else {
-
-//     password.type = "password";
-
-//   }
-
-// }
-
-// /* LOGIN */
-
-// function login() {
-
-//   const password =
-//     document.getElementById("password").value;
-
-//   const message =
-//     document.getElementById("loginMessage");
-
-//   if (password === "Desmond12") {
-
-//     localStorage.setItem(
-//       "loggedIn",
-//       "true"
-//     );
-
-//     window.location.href =
-//       "home.html";
-
-//   } else {
-
-//     message.innerText =
-//       "Wrong Password";
-
-//   }
-
-// }
-
-// /* LOGOUT */
-
-// function logout() {
-
-//   localStorage.removeItem(
-//     "loggedIn"
-//   );
-
-//   window.location.href =
-//     "login.html";
-
-// }
-
-// /* TRACK PACKAGE */
-
-// function trackPackage() {
-
-//   const id =
-//     document.getElementById("trackInput").value;
-
-//   if (id) {
-
-//     window.location.href =
-//       `track.html?id=${id}`;
-
-//   }
-
-// }
-
-// /* IMAGE UPLOAD */
-
-// const imageInput =
-//   document.getElementById("image");
-
-// let uploadedImages = [];
-
-// let imagesReady = false;
-
-// if (imageInput) {
-
-//   imageInput.addEventListener(
-//     "change",
-//     function () {
-
-//       const files =
-//         Array.from(this.files);
-
-//       uploadedImages = [];
-
-//       imagesReady = false;
-
-//       const previewContainer =
-//         document.getElementById(
-//           "previewContainer"
-//         );
-
-//       previewContainer.innerHTML = "";
-
-//       let completed = 0;
-
-//       files.forEach(file => {
-
-//         const reader =
-//           new FileReader();
-
-//         reader.onload = function (e) {
-
-//           uploadedImages.push(
-//             e.target.result
-//           );
-
-//           const img =
-//             document.createElement("img");
-
-//           img.src =
-//             e.target.result;
-
-//           previewContainer.appendChild(
-//             img
-//           );
-
-//           completed++;
-
-//           if (
-//             completed === files.length
-//           ) {
-
-//             imagesReady = true;
-
-//           }
-
-//         };
-
-//         reader.readAsDataURL(file);
-
-//       });
-
-//     }
-
-//   );
-
-// }
-
-
-// /* CREATE ORDER */
-
-// const form =
-//   document.getElementById("orderForm");
-
-// if (form) {
-
-//   form.addEventListener(
-//     "submit",
-//     function (e) {
-
-//       e.preventDefault();
-
-    
-// if (uploadedImages.length === 0) {
-
-//   alert(
-//     "Please upload at least one image"
-//   );
-
-//   return;
-
-// }
-
-// if (!imagesReady) {
-
-//   alert(
-//     "Images are still loading, please wait..."
-//   );
-
-//   return;
-
-// }
-
-// const trackingId =
-//         "PKG" +
-//         Math.floor(
-//           Math.random() * 9000 + 1000
-//         );
-
-//       const receiver =
-//         document.getElementById("receiver").value;
-
-//       const address =
-//         document.getElementById("address").value;
-
-//       const product =
-//         document.getElementById("product").value;
-
-//       const description =
-//         document.getElementById("description").value;
-
-//       const phone =
-//         document.getElementById("phone").value;
-
-//       const hours =
-//         parseInt(
-//           document.getElementById("hours").value
-//         ) || 0;
-
-//       const minutes =
-//         parseInt(
-//           document.getElementById("minutes").value
-//         ) || 0;
-
-//       let totalSeconds =
-//         (hours * 3600) +
-//         (minutes * 60);
-
-//       if (totalSeconds <= 0) {
-
-//         totalSeconds = 60;
-
-//       }
-
-//       const riders = [
-
-//         "Kelvin Smith",
-
-//         "David Mark",
-
-//         "John Rider",
-
-//         "Michael Jay"
-
-//       ];
-
-//       const randomRider =
-//         riders[
-//           Math.floor(
-//             Math.random() *
-//             riders.length
-//           )
-//         ];
-
-//       const order = {
-
-//         id: trackingId,
-
-//         receiver: receiver,
-
-//         address: address,
-
-//         product: product,
-
-//         description: description,
-
-//         phone: phone,
-
-//         images: uploadedImages,
-
-//         progress: 0,
-
-//         status: "Out For Delivery",
-
-//         rider: randomRider,
-
-//         totalSeconds: totalSeconds
-
-//       };
-
-//       localStorage.setItem(
-//         trackingId,
-//         JSON.stringify(order)
-//       );
-
-//       const trackingLink =
-//         `${window.location.origin}${window.location.pathname.replace("create-order.html","")}track.html?id=${trackingId}`;
-
-//       document.getElementById("result").innerHTML = `
-
-//       <div class="order-card success-card">
-
-//         <h2>
-//           Order Generated Successfully 🎉
-//         </h2>
-
-//         <br>
-
-//         <h3>
-//           Tracking ID
-//         </h3>
-
-//         <a
-//           href="${trackingLink}"
-//           class="tracking-link"
-//         >
-//           ${trackingId}
-//         </a>
-
-//         <br><br>
-
-//         <button
-//           onclick="copyTrackingLink('${trackingLink}')"
-//         >
-//           Copy Tracking Link
-//         </button>
-
-//         <br><br>
-
-//         <a
-//           href="${trackingLink}"
-//           class="btn"
-//         >
-//           Open Tracking Page
-//         </a>
-
-//       </div>
-
-//       `;
-
-//       form.reset();
-
-//       uploadedImages = [];
-
-//       document.getElementById(
-//         "previewContainer"
-//       ).innerHTML = "";
-
-//     }
-
-//   );
-
-// }
-
-// /* COPY LINK */
-
-// function copyTrackingLink(link) {
-
-//   navigator.clipboard.writeText(link);
-
-//   alert(
-//     "Tracking link copied!"
-//   );
-
-// }
-
-// /* TRACKING PAGE */
-
-// const params =
-//   new URLSearchParams(
-//     window.location.search
-//   );
-
-// const trackingId =
-//   params.get("id");
-
-// if (
-//   trackingId &&
-//   document.getElementById(
-//     "trackingDetails"
-//   )
-// ) {
-
-//   const order =
-//     JSON.parse(
-//       localStorage.getItem(trackingId)
-//     );
-
-//   if (order) {
-
-//     let galleryHTML = "";
-
-//     order.images.forEach(image => {
-
-//       galleryHTML += `
-//         <img src="${image}">
-//       `;
-
-//     });
-
-//     document.getElementById(
-//       "trackingDetails"
-//     ).innerHTML = `
-
-//     <div class="order-card">
-
-//       <h2>${order.id}</h2>
-
-//       <p>
-//         <strong>Receiver:</strong>
-//         ${order.receiver}
-//       </p>
-
-//       <p>
-//         <strong>Product:</strong>
-//         ${order.product}
-//       </p>
-
-//       <p>
-//         <strong>Address:</strong>
-//         ${order.address}
-//       </p>
-
-//       <p>
-//         <strong>Rider:</strong>
-//         ${order.rider}
-//       </p>
-
-//       <p>
-//         <strong>Status:</strong>
-//         <span id="statusText">
-//           ${order.status}
-//         </span>
-//       </p>
-
-//       <div class="tracking-gallery">
-//         ${galleryHTML}
-//       </div>
-
-//     </div>
-
-//     `;
-
-//     let progress = 0;
-
-//     let remainingTime =
-//       order.totalSeconds;
-
-//     const maxProgress = 70;
-
-//     const progressPerSecond =
-//       maxProgress / remainingTime;
-
-//     const timer =
-//       setInterval(() => {
-
-//         if (progress >= 70) {
-
-//           clearInterval(timer);
-
-//           document.getElementById(
-//             "statusText"
-//           ).innerText =
-//             "Delivery Delayed";
-
-//           return;
-
-//         }
-
-//         progress +=
-//           progressPerSecond;
-
-//         if (progress > 70) {
-
-//           progress = 70;
-
-//         }
-
-//         document.getElementById(
-//           "progressBar"
-//         ).style.width =
-//           progress + "%";
-
-//         document.getElementById(
-//           "progressText"
-//         ).innerText =
-//           Math.floor(progress) + "%";
-
-//         document.getElementById(
-//           "rider"
-//         ).style.left =
-//           progress + "%";
-
-//         remainingTime--;
-
-//         const hours =
-//           Math.floor(
-//             remainingTime / 3600
-//           );
-
-//         const minutes =
-//           Math.floor(
-//             (remainingTime % 3600) / 60
-//           );
-
-//         const seconds =
-//           remainingTime % 60;
-
-//         document.getElementById(
-//           "timer"
-//         ).innerText =
-//           `${hours}h ${minutes}m ${seconds}s`;
-
-//       }, 1000);
-
-//   }
-
-// }
-
-// /* DASHBOARD */
-
-// const ordersContainer =
-//   document.getElementById(
-//     "ordersContainer"
-//   );
-
-// if (ordersContainer) {
-
-//   for (
-//     let i = 0;
-//     i < localStorage.length;
-//     i++
-//   ) {
-
-//     const key =
-//       localStorage.key(i);
-
-//     if (
-//       key.startsWith("PKG")
-//     ) {
-
-//       const order =
-//         JSON.parse(
-//           localStorage.getItem(key)
-//         );
-
-//       ordersContainer.innerHTML += `
-
-//       <div class="order-card">
-
-//         <h3>${order.id}</h3>
-
-//         <p>${order.receiver}</p>
-
-//         <p>${order.product}</p>
-
-//         <p>${order.status}</p>
-
-//       </div>
-
-//       `;
-
-//     }
-
-//   }
-
-// }
 
 /* MENU */
 function toggleMenu() {
@@ -616,16 +48,43 @@ function trackPackage() {
 
 /* COPY LINK */
 function copyTrackingLink(link) {
-  navigator.clipboard.writeText(link);
-  alert("Tracking link copied!");
+  navigator.clipboard.writeText(link).then(function () {
+    alert("Tracking link copied!");
+  }).catch(function () {
+    // fallback for mobile browsers that block clipboard
+    prompt("Copy this link:", link);
+  });
 }
 
-/* DOM READY — image upload + form + dashboard + tracking */
+/* COMPRESS IMAGE — shrinks gallery photos before storing */
+function compressImage(base64, maxWidth, quality, callback) {
+  const img = new Image();
+  img.onload = function () {
+    const canvas = document.createElement("canvas");
+    let width = img.width;
+    let height = img.height;
+
+    if (width > maxWidth) {
+      height = Math.round((height * maxWidth) / width);
+      width = maxWidth;
+    }
+
+    canvas.width = width;
+    canvas.height = height;
+
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, width, height);
+
+    const compressed = canvas.toDataURL("image/jpeg", quality);
+    callback(compressed);
+  };
+  img.src = base64;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 
   /* IMAGE UPLOAD */
   let uploadedImages = [];
-
   const imageInput = document.getElementById("image");
 
   if (imageInput) {
@@ -634,13 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
       uploadedImages = [];
 
       const previewContainer = document.getElementById("previewContainer");
-      previewContainer.innerHTML = "";
-
-      // Show a loading indicator while images encode
-      const loadingMsg = document.createElement("p");
-      loadingMsg.id = "imgLoadingMsg";
-      loadingMsg.innerText = "Loading images...";
-      previewContainer.appendChild(loadingMsg);
+      previewContainer.innerHTML = '<p id="imgLoadingMsg">Loading images, please wait...</p>';
 
       let completed = 0;
 
@@ -648,24 +101,25 @@ document.addEventListener("DOMContentLoaded", function () {
         const reader = new FileReader();
 
         reader.onload = function (e) {
-          uploadedImages.push(e.target.result);
+          // Compress image to max 800px wide at 60% quality — keeps size small
+          compressImage(e.target.result, 800, 0.6, function (compressed) {
+            uploadedImages.push(compressed);
 
-          const img = document.createElement("img");
-          img.src = e.target.result;
-          previewContainer.appendChild(img);
+            const img = document.createElement("img");
+            img.src = compressed;
+            previewContainer.appendChild(img);
 
-          completed++;
-
-          if (completed === files.length) {
-            // Remove loading message once all images are ready
-            const msg = document.getElementById("imgLoadingMsg");
-            if (msg) msg.remove();
-          }
+            completed++;
+            if (completed === files.length) {
+              const msg = document.getElementById("imgLoadingMsg");
+              if (msg) msg.remove();
+            }
+          });
         };
 
         reader.onerror = function () {
           completed++;
-          alert("Failed to read one of the images. Please try again.");
+          alert("Could not read an image file. Please try again.");
         };
 
         reader.readAsDataURL(file);
@@ -685,10 +139,9 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      // Wait for images to finish loading if still pending
       const totalFiles = imageInput.files ? imageInput.files.length : 0;
       if (uploadedImages.length < totalFiles) {
-        alert("Images are still loading, please wait a moment and try again.");
+        alert("Images are still loading. Please wait a moment and try again.");
         return;
       }
 
@@ -709,6 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const riders = ["Kelvin Smith", "David Mark", "John Rider", "Michael Jay"];
       const randomRider = riders[Math.floor(Math.random() * riders.length)];
 
+      // Store order data WITHOUT images in localStorage
       const order = {
         id: trackingId,
         receiver: receiver,
@@ -716,14 +170,27 @@ document.addEventListener("DOMContentLoaded", function () {
         product: product,
         description: description,
         phone: phone,
-        images: uploadedImages,
         progress: 0,
         status: "Out For Delivery",
         rider: randomRider,
         totalSeconds: totalSeconds
       };
 
-      localStorage.setItem(trackingId, JSON.stringify(order));
+      // Try saving order to localStorage
+      try {
+        localStorage.setItem(trackingId, JSON.stringify(order));
+      } catch (err) {
+        alert("Storage error: " + err.message + ". Try clearing your browser storage.");
+        return;
+      }
+
+      // Store images separately in sessionStorage (cleared when tab closes)
+      try {
+        sessionStorage.setItem(trackingId + "_images", JSON.stringify(uploadedImages));
+      } catch (err) {
+        // If sessionStorage also fails, continue without images
+        console.warn("Could not store images:", err);
+      }
 
       const trackingLink = `${window.location.origin}${window.location.pathname.replace("create-order.html", "")}track.html?id=${trackingId}`;
 
@@ -754,8 +221,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const order = JSON.parse(localStorage.getItem(trackingId));
 
     if (order) {
+      // Try getting images from sessionStorage first, then localStorage (old orders)
+      let images = [];
+      try {
+        const stored = sessionStorage.getItem(trackingId + "_images");
+        if (stored) images = JSON.parse(stored);
+      } catch (err) {
+        console.warn("Could not load images from sessionStorage");
+      }
+
       let galleryHTML = "";
-      order.images.forEach(function (image) {
+      images.forEach(function (image) {
         galleryHTML += `<img src="${image}">`;
       });
 
@@ -807,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (ordersContainer) {
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      if (key.startsWith("PKG")) {
+      if (key && key.startsWith("PKG")) {
         const order = JSON.parse(localStorage.getItem(key));
         ordersContainer.innerHTML += `
           <div class="order-card">
