@@ -104,12 +104,75 @@ function trackPackage() {
 
 /* MULTIPLE IMAGE PREVIEW */
 
+// const imageInput =
+//   document.getElementById(
+//     "image"
+//   );
+
+// let uploadedImages = [];
+
+// if (imageInput) {
+
+//   imageInput.addEventListener(
+//     "change",
+//     function () {
+
+//       const files =
+//         Array.from(this.files);
+
+//       uploadedImages = [];
+
+//       const previewContainer =
+//         document.getElementById(
+//           "previewContainer"
+//         );
+
+//       previewContainer.innerHTML = "";
+
+//       files.forEach(file => {
+
+//         const reader =
+//           new FileReader();
+
+//         reader.onload = function (e) {
+
+//           uploadedImages.push(
+//             e.target.result
+//           );
+
+//           const img =
+//             document.createElement(
+//               "img"
+//             );
+
+//           img.src =
+//             e.target.result;
+
+//           previewContainer.appendChild(
+//             img
+//           );
+
+//         };
+
+//         reader.readAsDataURL(file);
+
+//       });
+
+//     }
+
+//   );
+
+// }
+
+
+
+
 const imageInput =
-  document.getElementById(
-    "image"
-  );
+  document.getElementById("image");
 
 let uploadedImages = [];
+
+let imagesLoaded = false;
 
 if (imageInput) {
 
@@ -122,12 +185,16 @@ if (imageInput) {
 
       uploadedImages = [];
 
+      imagesLoaded = false;
+
       const previewContainer =
         document.getElementById(
           "previewContainer"
         );
 
       previewContainer.innerHTML = "";
+
+      let loadedCount = 0;
 
       files.forEach(file => {
 
@@ -141,9 +208,7 @@ if (imageInput) {
           );
 
           const img =
-            document.createElement(
-              "img"
-            );
+            document.createElement("img");
 
           img.src =
             e.target.result;
@@ -151,6 +216,16 @@ if (imageInput) {
           previewContainer.appendChild(
             img
           );
+
+          loadedCount++;
+
+          if (
+            loadedCount === files.length
+          ) {
+
+            imagesLoaded = true;
+
+          }
 
         };
 
@@ -163,6 +238,7 @@ if (imageInput) {
   );
 
 }
+
 
 /* CREATE ORDER */
 
@@ -178,6 +254,16 @@ if (form) {
     function (e) {
 
       e.preventDefault();
+
+      if (!imagesLoaded) {
+
+  alert(
+    "Please wait for images to finish loading"
+  );
+
+  return;
+
+}
 
       const trackingId =
         "PKG" +
