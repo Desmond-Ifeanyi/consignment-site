@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <title>Track Package</title>
 </head>
 <body>
@@ -23,25 +24,19 @@
 <section class="tracking-page">
   <h1>Live Package Tracking</h1>
 
-  <div id="trackingDetails"></div>
-
-  <div class="progress-container">
-    <div class="progress-bar" id="progressBar"></div>
-  </div>
-
-  <h2 id="progressText">0%</h2>
-
-  <div class="map">
-    <div class="road"></div>
-    <div class="rider" id="rider">🏍</div>
-  </div>
+   <div id="trackingDetails"></div>
+   
+   <div class="progress-container"> 
+    <div class="progress-bar" id="progressBar"> </div>
+   </div>
+    <div id="map"></div>
+  
 
   <div class="status-box">
     <h3 id="statusText">Out for delivery</h3>
-    <p id="timer"></p>
   </div>
 </section>
-
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
