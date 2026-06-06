@@ -138,17 +138,37 @@ function trackPackage() {
 }
 
 /* =========================================
-   MULTIPLE IMAGE UPLOAD
+   COPY LINK
 ========================================= */
+
+function copyTrackingLink(link) {
+
+  const fullLink =
+
+    window.location.origin +
+    "/" +
+    link;
+
+  navigator.clipboard.writeText(
+    fullLink
+  );
+
+  alert(
+    "Tracking link copied!"
+  );
+
+}
+
+/* =========================================
+   IMAGE UPLOAD
+========================================= */
+
+let uploadedImages = [];
 
 const imageInput =
   document.getElementById(
     "image"
   );
-
-let uploadedImages = [];
-
-let imagesReady = false;
 
 if (imageInput) {
 
@@ -156,12 +176,10 @@ if (imageInput) {
     "change",
     function () {
 
-      const files =
-        Array.from(this.files);
-
       uploadedImages = [];
 
-      imagesReady = false;
+      const files =
+        Array.from(this.files);
 
       const previewContainer =
         document.getElementById(
@@ -174,14 +192,6 @@ if (imageInput) {
           "";
 
       }
-
-      if (files.length === 0) {
-
-        return;
-
-      }
-
-      let completed = 0;
 
       files.forEach(file => {
 
@@ -210,18 +220,6 @@ if (imageInput) {
               previewContainer.appendChild(
                 img
               );
-
-            }
-
-            completed++;
-
-            if (
-              completed ===
-              files.length
-            ) {
-
-              imagesReady =
-                true;
 
             }
 
@@ -261,17 +259,7 @@ if (form) {
       ) {
 
         alert(
-          "Upload at least one image"
-        );
-
-        return;
-
-      }
-
-      if (!imagesReady) {
-
-        alert(
-          "Images still loading"
+          "Please upload at least one image"
         );
 
         return;
@@ -279,7 +267,9 @@ if (form) {
       }
 
       const trackingId =
+
         "PKG" +
+
         Math.floor(
           Math.random() *
           9000 +
@@ -296,17 +286,16 @@ if (form) {
           "address"
         )?.value || "";
 
-        // =-----====
-        const city =
+      const city =
         document.getElementById(
           "city"
         )?.value || "";
 
-        const houseAddress =
+      const houseAddress =
         document.getElementById(
           "houseAddress"
         )?.value || "";
-// =--======
+
       const product =
         document.getElementById(
           "product"
@@ -334,20 +323,26 @@ if (form) {
 
       const hours =
         parseInt(
+
           document.getElementById(
             "hours"
           )?.value
+
         ) || 0;
 
       const minutes =
         parseInt(
+
           document.getElementById(
             "minutes"
           )?.value
+
         ) || 0;
 
       let totalSeconds =
+
         (hours * 3600) +
+
         (minutes * 60);
 
       if (
@@ -371,6 +366,7 @@ if (form) {
       ];
 
       const randomRider =
+
         riders[
           Math.floor(
             Math.random() *
@@ -388,11 +384,13 @@ if (form) {
 
         city: city,
 
-        houseAddress: houseAddress,
+        houseAddress:
+          houseAddress,
 
         product: product,
 
-        description: description,
+        description:
+          description,
 
         phone: phone,
 
@@ -405,13 +403,13 @@ if (form) {
         images:
           uploadedImages,
 
+        rider:
+          randomRider,
+
         status:
           "Out For Delivery",
 
-        progress: 0,
-
-        rider:
-          randomRider,
+        progress:0,
 
         totalSeconds:
           totalSeconds
@@ -419,11 +417,15 @@ if (form) {
       };
 
       localStorage.setItem(
+
         trackingId,
+
         JSON.stringify(order)
+
       );
 
       const trackingLink =
+
         `track.html?id=${trackingId}`;
 
       const result =
@@ -481,8 +483,6 @@ if (form) {
 
       uploadedImages = [];
 
-      imagesReady = false;
-
       const previewContainer =
         document.getElementById(
           "previewContainer"
@@ -497,25 +497,6 @@ if (form) {
 
     }
 
-  );
-
-}
-
-/* =========================================
-   COPY LINK
-========================================= */
-
-function copyTrackingLink(link) {
-
-  const fullLink =
-    `${window.location.origin}/${link}`;
-
-  navigator.clipboard.writeText(
-    fullLink
-  );
-
-  alert(
-    "Tracking link copied!"
   );
 
 }
@@ -580,21 +561,23 @@ if (
       <p>
         <strong>Receiver:</strong>
         ${order.receiver}
-        <p>
+      </p>
+
+      <p>
         <strong>Delivery Address:</strong>
         ${order.address}
-        </p>
-        
-        <p>
+      </p>
+
+      <p>
         <strong>City:</strong>
         ${order.city}
-        </p>
-        
-        <p>
+      </p>
+
+      <p>
         <strong>House Address:</strong>
         ${order.houseAddress}
-        </p>
       </p>
+
       <p>
         <strong>From:</strong>
         ${order.fromCountry}
@@ -703,15 +686,13 @@ if (
 
         const hours =
           Math.floor(
-            remainingTime /
-            3600
+            remainingTime / 3600
           );
 
         const minutes =
           Math.floor(
             (
-              remainingTime %
-              3600
+              remainingTime % 3600
             ) / 60
           );
 
@@ -725,10 +706,10 @@ if (
 
         }
 
-      }, 1000);
+      },1000);
 
 /* =========================================
-   REAL LIVE TRACKING MAP
+   REAL MOVING MAP
 ========================================= */
 
 if (
@@ -736,51 +717,25 @@ if (
   typeof L !== "undefined"
 ) {
 
-  /* COUNTRY COORDINATES */
-
   const countryCoords = {
 
     nigeria:[6.5244,3.3792],
     usa:[40.7128,-74.0060],
     canada:[43.6510,-79.3470],
-    mexico:[19.4326,-99.1332],
-    brazil:[-23.5505,-46.6333],
-    argentina:[-34.6037,-58.3816],
     uk:[51.5074,-0.1278],
     france:[48.8566,2.3522],
     germany:[52.5200,13.4050],
     italy:[41.9028,12.4964],
     spain:[40.4168,-3.7038],
     portugal:[38.7223,-9.1393],
-    netherlands:[52.3676,4.9041],
-    belgium:[50.8503,4.3517],
-    sweden:[59.3293,18.0686],
-    norway:[59.9139,10.7522],
-    finland:[60.1699,24.9384],
-    denmark:[55.6761,12.5683],
-    switzerland:[46.9480,7.4474],
-    austria:[48.2082,16.3738],
-    poland:[52.2297,21.0122],
-    ukraine:[50.4501,30.5234],
-    russia:[55.7558,37.6173],
-    turkey:[41.0082,28.9784],
     india:[28.6139,77.2090],
     china:[39.9042,116.4074],
     japan:[35.6762,139.6503],
-    southkorea:[37.5665,126.9780],
     australia:[-33.8688,151.2093],
-    newzealand:[-36.8485,174.7633],
     southafrica:[-26.2041,28.0473],
-    egypt:[30.0444,31.2357],
-    kenya:[-1.2921,36.8219],
-    ghana:[5.6037,-0.1870],
-    morocco:[33.5731,-7.5898],
-    saudiarabia:[24.7136,46.6753],
     uae:[25.2048,55.2708]
 
   };
-
-  /* START + DESTINATION */
 
   const fromCoords =
     countryCoords[
@@ -794,23 +749,18 @@ if (
 
   /* CREATE MAP */
 
-  const map = L.map("map", {
+  const map =
+    L.map("map", {
 
-    zoomControl:true,
+      zoomControl:true,
 
-    scrollWheelZoom:true,
+      scrollWheelZoom:true,
 
-    dragging:true,
+      dragging:true,
 
-    touchZoom:true,
+      touchZoom:true
 
-    doubleClickZoom:true,
-
-    boxZoom:true,
-
-    keyboard:true
-
-  });
+    });
 
   /* DEEP STREET MAP */
 
@@ -828,24 +778,6 @@ if (
     }
 
   ).addTo(map);
-
-  /* START MARKER */
-
-  const startMarker =
-    L.marker(fromCoords)
-    .addTo(map)
-    .bindPopup(
-      "Package Origin"
-    );
-
-  /* DESTINATION MARKER */
-
-  const endMarker =
-    L.marker(toCoords)
-    .addTo(map)
-    .bindPopup(
-      "Destination"
-    );
 
   /* ROUTE LINE */
 
@@ -874,13 +806,25 @@ if (
     routeLine.getBounds()
   );
 
+  /* START MARKER */
+
+  L.marker(fromCoords)
+    .addTo(map)
+    .bindPopup("Order From");
+
+  /* DESTINATION MARKER */
+
+  L.marker(toCoords)
+    .addTo(map)
+    .bindPopup("Destination");
+
   /* RIDER ICON */
 
   const riderIcon =
     L.icon({
 
       iconUrl:
-      "https://cdn-icons-png.flaticon.com/512/684/684908.png",
+      "https://cdn-icons-png.flaticon.com/512/854/854878.png",
 
       iconSize:[45,45],
 
@@ -904,32 +848,32 @@ if (
     ).addTo(map);
 
   /* =========================================
-     MOVE RIDER WITH PROGRESS BAR
+     MOVE WITH PROGRESS BAR
   ========================================= */
 
-  const moveInterval =
+  const mapMove =
     setInterval(() => {
 
-      /* STOP AT 70% */
+      /* STOP EXACTLY AT 70% */
+
 
       if (progress >= 70) {
 
-        clearInterval(
-          moveInterval
-        );
+        progress = 70;
 
-        return;
+         clearInterval(mapMove);
+      
+        }     
 
-      }
 
-      /* CALCULATE MOVEMENT */
+      /* USE SAME PROGRESS */
 
-      const movePercent =
+      const percent =
         progress / 70;
 
-      /* CURRENT POSITION */
+      /* CALCULATE POSITION */
 
-      const currentLat =
+      const lat =
 
         fromCoords[0] +
 
@@ -937,12 +881,10 @@ if (
           (
             toCoords[0] -
             fromCoords[0]
-          ) *
-
-          movePercent
+          ) * percent
         );
 
-      const currentLng =
+      const lng =
 
         fromCoords[1] +
 
@@ -950,32 +892,20 @@ if (
           (
             toCoords[1] -
             fromCoords[1]
-          ) *
-
-          movePercent
+          ) * percent
         );
 
       /* MOVE RIDER */
 
-      riderMarker.setLatLng([
-
-        currentLat,
-
-        currentLng
-
-      ]);
+      riderMarker.setLatLng(
+        [lat,lng]
+      );
 
       /* FOLLOW RIDER */
 
       map.panTo(
 
-        [
-
-          currentLat,
-
-          currentLng
-
-        ],
+        [lat,lng],
 
         {
 
@@ -990,7 +920,6 @@ if (
     },1000);
 
 }
-
 
 
   } else {
@@ -1010,10 +939,6 @@ if (
   }
 
 }
-
-
-
-
 
 /* =========================================
    DASHBOARD
@@ -1046,24 +971,25 @@ if (ordersContainer) {
           )
         );
 
-        ordersContainer.innerHTML += `
+      ordersContainer.innerHTML += `
 
-        <div class="order-card">
+      <div class="order-card">
 
-          <h3>${order.id}</h3>
+        <h3>${order.id}</h3>
 
-          <p>${order.receiver}</p>
+        <p>${order.receiver}</p>
 
-          <p>${order.product}</p>
+        <p>${order.product}</p>
 
-          <p>${order.status}</p>
+        <p>${order.status}</p>
 
-        </div>
+      </div>
 
-        `;
+      `;
 
     }
 
   }
 
 }
+
