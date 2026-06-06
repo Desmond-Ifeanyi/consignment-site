@@ -164,13 +164,12 @@ function copyTrackingLink(link) {
 ========================================= */
 
 
-
 const imageInput =
-  document.getElementById(
-    "image"
-  );
-  let uploadedImages = [];
-  let imagesReady = false;
+  document.getElementById("image");
+
+let uploadedImages = [];
+
+let imagesReady = false;
 
 if (imageInput) {
 
@@ -178,66 +177,100 @@ if (imageInput) {
     "change",
     function () {
 
-    
-
       const files =
         Array.from(this.files);
 
-          uploadedImages = [];
-          imagesReady = false;
+      uploadedImages = [];
+
+      imagesReady = false;
 
       const previewContainer =
         document.getElementById(
           "previewContainer"
         );
 
-     
+      if (previewContainer) {
 
-        previewContainer.innerHTML =
-          "";
+        previewContainer.innerHTML = "";
 
-          let completed = 0;
+      }
 
+      // NO FILES
+      if (files.length === 0) {
+
+        alert("Please select image");
+
+        return;
+
+      }
+
+      let completed = 0;
 
       files.forEach(file => {
+
+        // VALIDATE IMAGE
+        if (
+          !file.type.startsWith(
+            "image/"
+          )
+        ) {
+
+          alert(
+            "Only image files allowed"
+          );
+
+          return;
+
+        }
 
         const reader =
           new FileReader();
 
-        reader.onload =
-          function (e) {
+        reader.onload = function (e) {
 
-            uploadedImages.push(
-              e.target.result
-            );
+          uploadedImages.push(
+            e.target.result
+          );
 
+          // PREVIEW
+          if (previewContainer) {
 
-
-          
-
-              const img =
-                document.createElement(
-                  "img"
-                );
-
-              img.src =
-                e.target.result;
-
-              previewContainer.appendChild(
-                img
+            const img =
+              document.createElement(
+                "img"
               );
 
-              completed++
-              if(completed === file.length){
-                imagesReady = true;
-              }
-            };
+            img.src =
+              e.target.result;
 
-          
+            previewContainer.appendChild(
+              img
+            );
 
-        reader.readAsDataURL(
-          file
-        );
+          }
+
+          completed++;
+
+          // FIXED BUG HERE
+          if (
+            completed === files.length
+          ) {
+
+            imagesReady = true;
+
+          }
+
+        };
+
+        reader.onerror = function () {
+
+          alert(
+            "Image failed to load"
+          );
+
+        };
+
+        reader.readAsDataURL(file);
 
       });
 
@@ -246,7 +279,6 @@ if (imageInput) {
   );
 
 }
-
 /* =========================================
    CREATE ORDER
 ========================================= */
@@ -265,7 +297,8 @@ if (form) {
       e.preventDefault();
 
       if (
-        uploadedImages.length === 0
+        uploadedImages.length === 0 ||
+      !imagesReady
       ) {
 
         alert(
@@ -434,9 +467,11 @@ if (form) {
 
       );
 
-      const trackingLink =
-
-        `track.html?id=${trackingId}`;
+     window.location.href =
+  new URL(
+    `track.html?id=${id}`,
+    window.location.href
+  ).href;
 
       const result =
         document.getElementById(
