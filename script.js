@@ -163,12 +163,14 @@ function copyTrackingLink(link) {
    IMAGE UPLOAD
 ========================================= */
 
-let uploadedImages = [];
+
 
 const imageInput =
   document.getElementById(
     "image"
   );
+  let uploadedImages = [];
+  let imagesReady = false;
 
 if (imageInput) {
 
@@ -176,22 +178,26 @@ if (imageInput) {
     "change",
     function () {
 
-      uploadedImages = [];
+    
 
       const files =
         Array.from(this.files);
+
+          uploadedImages = [];
+          imagesReady = false;
 
       const previewContainer =
         document.getElementById(
           "previewContainer"
         );
 
-      if (previewContainer) {
+     
 
         previewContainer.innerHTML =
           "";
 
-      }
+          let completed = 0;
+
 
       files.forEach(file => {
 
@@ -205,9 +211,9 @@ if (imageInput) {
               e.target.result
             );
 
-            if (
-              previewContainer
-            ) {
+
+
+          
 
               const img =
                 document.createElement(
@@ -221,9 +227,13 @@ if (imageInput) {
                 img
               );
 
-            }
+              completed++
+              if(completed === file.length){
+                imagesReady = true;
+              }
+            };
 
-          };
+          
 
         reader.readAsDataURL(
           file
