@@ -497,10 +497,11 @@ footer{
     font-size:32px;
   }
 
-  .map{
-    height:120px;
-  }
+  #map{
 
+    height:350px;
+
+  }
   .rider{
     font-size:30px;
   }
@@ -562,6 +563,7 @@ footer{
     text-decoration:none; 
     font-weight:bold; 
     word-break:break-all; 
+    display: inline-block;
 } 
 .tracking-link:hover{
      text-decoration:underline;
@@ -584,12 +586,13 @@ footer{
            gap:15px; 
           flex-wrap:wrap;
            width:100%;
-            max-width:180px;
+            /* max-width:180px; */
             margin-top:20px;
             border-radius:15px;
         } 
         .preview-container img{
-           width:100px; height:100px;
+           width:100px;
+            height:100px;
             object-fit:cover; 
            border-radius:15px;
             border:2px solid orange; 
@@ -632,16 +635,5 @@ footer{
 .leaflet-container{
 
   font-size:16px;
-
-}
-
-@media(max-width:768px){
-
-  #map{
-
-    height:350px;
-    
-
-  }
 
 }
