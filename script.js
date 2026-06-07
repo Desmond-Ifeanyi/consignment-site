@@ -141,12 +141,34 @@ function trackPackage() {
    COPY LINK
 ========================================= */
 
+// function copyTrackingLink(link) {
+
+//   const fullLink =
+
+//     window.location.origin +
+//     "/" +
+//     link;
+
+//   navigator.clipboard.writeText(
+//     fullLink
+//   );
+
+//   alert(
+//     "Tracking link copied!"
+//   );
+
+// }
+
 function copyTrackingLink(link) {
 
   const fullLink =
 
     window.location.origin +
-    "/" +
+    window.location.pathname
+      .replace(
+        "create-order.html",
+        ""
+      ) +
     link;
 
   navigator.clipboard.writeText(
@@ -201,9 +223,19 @@ if (imageInput) {
         reader.onload =
           function (e) {
 
-            uploadedImages.push(
-              e.target.result
-            );
+            // uploadedImages.push(
+            //   e.target.result
+            // );
+             if (
+  e.target.result.length <
+  2000000
+) {
+
+  uploadedImages.push(
+    e.target.result
+  );
+
+}
 
             if (
               previewContainer
@@ -416,14 +448,22 @@ if (form) {
 
       };
 
-      localStorage.setItem(
+      try {
 
-        trackingId,
+  localStorage.setItem(
+    trackingId,
+    JSON.stringify(order)
+  );
 
-        JSON.stringify(order)
+} catch(error) {
 
-      );
+  alert(
+    "Images are too large for mobile storage"
+  );
 
+  return;
+
+}
       const trackingLink =
 
         `track.html?id=${trackingId}`;
