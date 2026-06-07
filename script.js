@@ -458,7 +458,7 @@ if (form) {
 } catch(error) {
 
   alert(
-    "Images are too large for mobile storage"
+    "Images are too large for mobile storage you can check with  another browser"
   );
 
   return;
